@@ -1,0 +1,75 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Consumption</title>
+</head>
+<body>
+    <h2>Check Power and Energy Consumption</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="start_time">Start Time:</label>
+        <input type="datetime-local" id="start_time" name="start_time">
+        <br>
+        <label for="end_time">End Time:</label>
+        <input type="datetime-local" id="end_time" name="end_time">
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Consumption</title>
+</head>
+<body>
+    <h1>Check Power and Energy Consumption</h1>
+    
+    <form id="datetimeForm">    
+        <label for="start_time">Start Time:</label>
+        <input type="datetime-local" id="start_time" name="start_time" required><br><br>
+        <br>
+        <label for="end_time">End Time:</label>
+        <input type="datetime-local" id="end_time" name="end_time" required><br><br>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('datetimeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get the selected datetime and name
+            let start_time = document.getElementById('start_time').value;
+            let end_time = document.getElementById('end_time').value;
+
+            // Convert datetime to ISO 8601 format
+            let start_time1 = new Date(start_time).toISOString();
+            let end_time1 = new Date(end_time).toISOString();
+
+            // Send the name and datetime to the backend via fetch
+            fetch('consumption_calculation/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'  // Use the Django CSRF token
+                },
+                body: JSON.stringify({ start_time: start_time1, end_time: end_time1 })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the response
+                document.getElementById('response').innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fan Simulator</title>
+</head>
+<body>
+    <h1>Fan Simulator</h1>
+    <form id="fanForm" method="POST" action="">
+        {% csrf_token %}
+        <label for="status">Fan Status:</label>
+        <select id="status" name="status">
+            <option value="1">On</option>
+            <option value="0">Off</option>
+        </select>
+
+        <label for="speed">Speed Level:</label>
+        <select id="speed" name="speed_level">
+            <option value="1">Speed 1</option>
+            <option value="2">Speed 2</option>
+            <option value="3">Speed 3</option>
+            <option value="4">Speed 4</option>
+            <option value="5">Speed 5</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
