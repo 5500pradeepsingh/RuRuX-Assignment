@@ -10,18 +10,18 @@ Go to http://127.0.0.1:8000/fan/consumption/ to check power and energy consumpti
 
 Project Setup->
 
-> Install Django and PostgreSQL-
+> Install Django and PostgreSQL:
 pip install django
 pip install django psycopg2
 
-> Run Migrations-
+> Run Migrations:
 python manage.py makemigrations
 python manage.py migrate
 
 > Run the server:
 python manage.py runserver
 
-> Insert Fan Specifications in Django Shell-
+> Insert Fan Specifications in Django Shell:
 python manage.py shell
 
 from fan.models import FanSpecification
